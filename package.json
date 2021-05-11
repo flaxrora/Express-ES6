@@ -1,0 +1,90 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "watch:dev": "nodemon",
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-src/app.js",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist-src --extensions \".ts,.js\" --source-maps inline",
+    "clean": "rimraf dist-src",
+    "test": "jest",
+    "lint": "eslint './src/**/*.{js,ts}'",
+    "lint:fix": "eslint './src/**/*.{js,ts}' --fix"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-typescript": "^7.13.0",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "express-async-handler": "^1.1.4",
+    "express-jwt": "^6.0.0",
+    "express-list-endpoints": "^5.0.0",
+    "fp-ts": "^2.9.5",
+    "io-ts": "^2.2.16",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "node-minify": "^3.6.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/typescript"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-syntax-import-meta",
+      "@babel/plugin-proposal-json-strings",
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "regenerator": true
+        }
+      ]
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@types/jsonwebtoken": "^8.5.1",
+    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "@typescript-eslint/parser": "4.0.1",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^26.6.3",
+    "nodemon": "1.18.4",
+    "prettier": "^1.17.0",
+    "typescript": "^4.1.5"
+  }
+}
